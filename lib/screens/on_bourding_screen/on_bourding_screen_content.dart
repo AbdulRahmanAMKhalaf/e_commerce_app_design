@@ -1,73 +1,73 @@
 import 'package:e_commerce_app_design/model/on_bourding_model.dart';
 import 'package:e_commerce_app_design/screens/login_screen/login_screen_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBourdingScreenContent extends StatelessWidget {
-  OnBourdingScreenContent({super.key});
-
-  final PageController pageController = PageController();
+   const OnBourdingScreenContent({super.key,});
 
   @override
   Widget build(BuildContext context) {
+    final PageController pageController = PageController();
+    int index=0;
+    AnimationController controller= ;
     return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
-        Expanded(
-          child: PageView.builder(
-              itemBuilder:(context,index)=>Image(
-                 fit: BoxFit.cover,
-                  image: AssetImage(
-                    bourdingList[index].image
-                  ),
-              ),
-            itemCount: bourdingList.length,
-          ),
+        PageView.builder(
+            itemBuilder:(context,index)=>Image(
+               fit: BoxFit.cover,
+                image: AssetImage(
+                  bourdingList[index].image
+                ),
+            ),
+          controller: pageController,
+          onPageChanged: (value) {
+            index=value;
+          },
+          itemCount: bourdingList.length,
         ),
-        
-      ],
-    );
-  }
-}
-/* Container(
-            height: 41.h,
-           width: double.infinity,
-           decoration: BoxDecoration(
-             color: Colors.white,
-             border: Border.all(
-               color: HexColor('#eccd9e'),
-               width: 1.5.w,
-             ),
-             borderRadius: BorderRadius.only(
-               topRight: Radius.circular(90.px),
-             )
-           ),
-            child: Padding(
-              padding: EdgeInsets.all(5.w),
+        Container(
+          height: 41.h,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: HexColor('#eccd9e'),
+                width: 1.5.w,
+              ),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(90.px),
+              )
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(5.w),
+            child: SlideTransition(
+              position: ,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(bourdingList[index].title,
-                  textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 30.px,
-                    fontWeight: FontWeight.w800,
-        
-                  ),
+                      color: Colors.black87,
+                      fontSize: 30.px,
+                      fontWeight: FontWeight.w800,
+
+                    ),
                   ),
                   SizedBox(height: 1.5.h,),
                   Text(bourdingList[index].text,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 15.px,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey.shade400,
+                      fontSize: 15.px,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
                   SizedBox(height: 2.5.h,),
                   SmoothPageIndicator(
                     controller: pageController,
@@ -110,4 +110,9 @@ class OnBourdingScreenContent extends StatelessWidget {
                 ],
               ),
             ),
-          ),*/
+          ),
+        ),
+      ],
+    );
+  }
+}
