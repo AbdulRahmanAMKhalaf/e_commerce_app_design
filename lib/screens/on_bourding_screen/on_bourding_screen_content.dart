@@ -1,30 +1,34 @@
+import 'package:e_commerce_app_design/bloc/bourding_bloc.dart';
 import 'package:e_commerce_app_design/model/on_bourding_model.dart';
 import 'package:e_commerce_app_design/screens/login_screen/login_screen_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBourdingScreenContent extends StatelessWidget {
-   const OnBourdingScreenContent({super.key,});
+  const OnBourdingScreenContent({super.key,});
 
   @override
   Widget build(BuildContext context) {
+    var bloc = context.read<BourdingBloc>();
     final PageController pageController = PageController();
-    int index=0;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
         PageView.builder(
-            itemBuilder:(context,index)=>Image(
-               fit: BoxFit.cover,
+          itemBuilder: (context, index) =>
+              Image(
+                fit: BoxFit.cover,
                 image: AssetImage(
-                  bourdingList[index].image
+                    bourdingList[index].image
                 ),
-            ),
+              ),
           controller: pageController,
           onPageChanged: (value) {
-            index=value;
+            bloc.index = value;
+            bloc.add(ChangeTextEvent());
           },
           itemCount: bourdingList.length,
         ),
@@ -47,23 +51,38 @@ class OnBourdingScreenContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(bourdingList[index].title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 30.px,
-                    fontWeight: FontWeight.w800,
-
-                  ),
+                BlocBuilder<BourdingBloc, BourdingState>(
+                  builder: (context, state) {
+                    return AnimatedDefaultTextStyle(
+                        maxLines: 2,
+                        curve: Curves.decelerate,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 30.px,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        duration: const Duration(milliseconds: 1200),
+                        child: Text(bourdingList[bloc.index].title,
+                          textAlign: TextAlign.center,
+                        ));
+                  },
                 ),
                 SizedBox(height: 1.5.h,),
-                Text(bourdingList[index].text,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.grey.shade400,
-                    fontSize: 15.px,
-                    fontWeight: FontWeight.w800,
-                  ),
+                BlocBuilder<BourdingBloc, BourdingState>(
+                  builder: (context, state) {
+                    return AnimatedDefaultTextStyle(
+                        curve: Curves.decelerate,
+                        style: TextStyle(
+                          color: Colors.grey.shade400,
+                          fontSize: 15.px,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        duration: const Duration(milliseconds: 1200),
+                        child: Text(bourdingList[bloc.index].text,
+                          textAlign: TextAlign.center,
+                        ));
+                  },
                 ),
                 SizedBox(height: 2.5.h,),
                 SmoothPageIndicator(
@@ -86,11 +105,11 @@ class OnBourdingScreenContent extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(context,
                           MaterialPageRoute(
-                            builder:(context)=>const LoginScreenView(),
+                            builder: (context) => const LoginScreenView(),
                           ),
                         );
                       },
-                      height:7.h,
+                      height: 7.h,
                       color: HexColor('#df6f47'),
                       child: Center(
                         child: Text(
