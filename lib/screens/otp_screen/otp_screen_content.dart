@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class OtpScreenContent extends StatelessWidget {
+class OtpScreenContent extends StatelessWidget{
   const OtpScreenContent({super.key});
 
   @override
@@ -36,7 +36,7 @@ class OtpScreenContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
            SizedBox(
-             width: 16.w,
+             width: 26.w,
              height: 8.h,
              child: TextFormField(
                style: const TextStyle(
