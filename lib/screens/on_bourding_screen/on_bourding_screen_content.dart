@@ -2,7 +2,6 @@ import 'package:e_commerce_app_design/bloc/bourding_bloc.dart';
 import 'package:e_commerce_app_design/model/on_bourding_model.dart';
 import 'package:e_commerce_app_design/screens/login_screen/login_screen_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -54,35 +53,27 @@ class OnBourdingScreenContent extends StatelessWidget {
               children: [
                 BlocBuilder<BourdingBloc, BourdingState>(
                   builder: (context, state) {
-                    return AnimatedDefaultTextStyle(
-                        maxLines: 2,
-                        curve: Curves.decelerate,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 30.px,
-                          fontWeight: FontWeight.w800,
-                        ),
-                        duration: const Duration(milliseconds: 1200),
-                        child: Text(bourdingList[bloc.index].title,
-                          textAlign: TextAlign.center,
-                        ));
+                    return Text(bourdingList[bloc.index].title,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 30.px,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 1.5.h,),
                 BlocBuilder<BourdingBloc, BourdingState>(
                   builder: (context, state) {
-                    return AnimatedDefaultTextStyle(
-                        curve: Curves.decelerate,
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 15.px,
-                          fontWeight: FontWeight.w800,
-                        ),
-                        duration: const Duration(milliseconds: 1200),
-                        child: Text(bourdingList[bloc.index].text,
-                          textAlign: TextAlign.center,
-                        ));
+                    return Text(bourdingList[bloc.index].text,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15.px
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 2.5.h,),
