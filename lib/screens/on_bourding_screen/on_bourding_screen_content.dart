@@ -2,6 +2,7 @@ import 'package:e_commerce_app_design/bloc/bourding_bloc.dart';
 import 'package:e_commerce_app_design/model/on_bourding_model.dart';
 import 'package:e_commerce_app_design/screens/login_screen/login_screen_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
